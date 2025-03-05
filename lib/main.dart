@@ -1,3 +1,5 @@
+//
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -34,7 +36,7 @@ class _SimplePageState extends State<SimplePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true, 
+        centerTitle: true,
         title: Text('Hello World'),
         leading: IconButton(icon: Icon(Icons.menu), onPressed: () {}),
         actions: <Widget>[
@@ -50,7 +52,33 @@ class _SimplePageState extends State<SimplePage> {
           SizedBox(width: 10),
         ],
       ),
-      body: Center(child: Container()),
+      body: SafeArea(
+        // Added SafeArea
+        child: Row(
+          children: <Widget>[
+            Expanded(flex: 1, child: Container(color: Colors.red)),
+            Expanded(
+              flex: 2,
+              child: Container(
+                color: Colors.purple,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Container(width: 100, height: 50, color: Colors.yellow),
+                        Container(width: 100, height: 50, color: Colors.green),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Expanded(flex: 1, child: Container(color: Colors.blue)),
+          ],
+        ),
+      ),
     );
   }
 }
