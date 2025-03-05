@@ -38,6 +38,7 @@ class _SimplePageState extends State<SimplePage> {
       appBar: AppBar(
         centerTitle: true,
         title: Text('Hello World'),
+        backgroundColor: Colors.yellowAccent,
         leading: IconButton(icon: Icon(Icons.menu), onPressed: () {}),
         actions: <Widget>[
           IconButton(
@@ -67,8 +68,8 @@ class _SimplePageState extends State<SimplePage> {
                     Row(
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
-                        Container(width: 100, height: 50, color: Colors.yellow),
-                        Container(width: 100, height: 50, color: Colors.green),
+                        Container(width: 90, height: 50, color: Colors.yellow),
+                        Container(width: 90, height: 50, color: Colors.green),
                       ],
                     ),
                   ],
