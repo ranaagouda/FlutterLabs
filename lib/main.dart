@@ -1,7 +1,5 @@
-//
-
 import 'package:flutter/material.dart';
-
+import 'login.dart'; 
 void main() {
   runApp(MyApp());
 }
@@ -54,29 +52,54 @@ class _SimplePageState extends State<SimplePage> {
         ],
       ),
       body: SafeArea(
-        // Added SafeArea
-        child: Row(
+        child: Column(
+          // Changed to Column to add button at the bottom
           children: <Widget>[
-            Expanded(flex: 1, child: Container(color: Colors.red)),
             Expanded(
-              flex: 2,
-              child: Container(
-                color: Colors.purple,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        Container(width: 90, height: 50, color: Colors.yellow),
-                        Container(width: 90, height: 50, color: Colors.green),
-                      ],
+              // Wrapped Row with Expanded
+              child: Row(
+                children: <Widget>[
+                  Expanded(flex: 1, child: Container(color: Colors.red)),
+                  Expanded(
+                    flex: 2,
+                    child: Container(
+                      color: Colors.purple,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: <Widget>[
+                              Container(
+                                width: 90,
+                                height: 50,
+                                color: Colors.yellow,
+                              ),
+                              Container(
+                                width: 90,
+                                height: 50,
+                                color: Colors.green,
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
-                  ],
-                ),
+                  ),
+                  Expanded(flex: 1, child: Container(color: Colors.blue)),
+                ],
               ),
             ),
-            Expanded(flex: 1, child: Container(color: Colors.blue)),
+            ElevatedButton(
+              // Added the button
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => LoginPage()),
+                );
+              },
+              child: Text('Go to Login'),
+            ),
           ],
         ),
       ),
