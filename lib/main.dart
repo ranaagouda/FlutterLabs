@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'login.dart'; 
+import 'login.dart';
+import 'chat.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -53,10 +55,8 @@ class _SimplePageState extends State<SimplePage> {
       ),
       body: SafeArea(
         child: Column(
-          // Changed to Column to add button at the bottom
           children: <Widget>[
             Expanded(
-              // Wrapped Row with Expanded
               child: Row(
                 children: <Widget>[
                   Expanded(flex: 1, child: Container(color: Colors.red)),
@@ -90,15 +90,32 @@ class _SimplePageState extends State<SimplePage> {
                 ],
               ),
             ),
-            ElevatedButton(
-              // Added the button
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => LoginPage()),
-                );
-              },
-              child: Text('Go to Login'),
+            // Buttons in a Row with spacing
+            Padding(
+              padding: const EdgeInsets.all(8.0), // Add padding around the row
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround, // Add spacing
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => LoginPage()),
+                      );
+                    },
+                    child: Text('Go to Login'),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => ChatPage()),
+                      );
+                    },
+                    child: Text('Go to Chat'),
+                  ),
+                ],
+              ),
             ),
           ],
         ),
