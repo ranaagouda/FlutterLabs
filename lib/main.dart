@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'login.dart';
 import 'chat.dart';
+import 'bmi_calculator.dart'; // Make sure this is correctly named
 
 void main() {
   runApp(MyApp());
@@ -12,112 +13,114 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Simple Page',
+      title: 'Navigation App',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.teal),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            padding: const EdgeInsets.symmetric(
+              vertical: 12.0,
+              horizontal: 24.0,
+            ), // Add inner padding
+          ),
+        ),
       ),
-      home: SimplePage(),
+      initialRoute: '/', // Set the initial route
+      routes: {
+        '/': (context) => const HomeScreen(),
+        '/login': (context) => LoginPage(),
+        '/chat': (context) => ChatPage(),
+        '/bmi': (context) => BMICalculatorScreen(), // Use the correct name
+      },
     );
   }
 }
 
-class SimplePage extends StatefulWidget {
-  const SimplePage({super.key});
-
-  @override
-  State<SimplePage> createState() => _SimplePageState();
-}
-
-class _SimplePageState extends State<SimplePage> {
-  int _starCount = 1;
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text('Hello World'),
-        backgroundColor: Colors.yellowAccent,
-        leading: IconButton(icon: Icon(Icons.menu), onPressed: () {}),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.star_border),
-            onPressed: () {
-              setState(() {
-                _starCount++;
-              });
-            },
-          ),
-          Center(child: Text('$_starCount')),
-          SizedBox(width: 10),
-        ],
-      ),
+      appBar: AppBar(centerTitle: true, title: const Text('Navigation')),
       body: SafeArea(
-        child: Column(
-          children: <Widget>[
-            Expanded(
-              child: Row(
-                children: <Widget>[
-                  Expanded(flex: 1, child: Container(color: Colors.red)),
-                  Expanded(
-                    flex: 2,
-                    child: Container(
-                      color: Colors.purple,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Row(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: <Widget>[
+              // Shorter Rows and Columns
+              SizedBox(
+                height: 100, // Adjust height as needed
+                child: Row(
+                  children: <Widget>[
+                    Expanded(
+                      flex: 1,
+                      child: Container(
+                        color: Colors.red,
+                        height: double.infinity,
+                      ),
+                    ),
+                    Expanded(
+                      flex: 2,
+                      child: Container(
+                        color: Colors.purple,
+                        child: Center(
+                          child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: <Widget>[
                               Container(
-                                width: 90,
-                                height: 50,
+                                width: 70, // Adjust width as needed
+                                height: 40, // Adjust height as needed
                                 color: Colors.yellow,
                               ),
                               Container(
-                                width: 90,
-                                height: 50,
+                                width: 70, // Adjust width as needed
+                                height: 40, // Adjust height as needed
                                 color: Colors.green,
                               ),
                             ],
                           ),
-                        ],
+                        ),
                       ),
                     ),
-                  ),
-                  Expanded(flex: 1, child: Container(color: Colors.blue)),
-                ],
+                    Expanded(
+                      flex: 1,
+                      child: Container(
+                        color: Colors.blue,
+                        height: double.infinity,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            // Buttons in a Row with spacing
-            Padding(
-              padding: const EdgeInsets.all(8.0), // Add padding around the row
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround, // Add spacing
-                children: [
+              const SizedBox(height: 20),
+              // Navigation Buttons
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
                   ElevatedButton(
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => LoginPage()),
-                      );
+                      Navigator.pushNamed(context, '/login');
                     },
-                    child: Text('Go to Login'),
+                    child: const Text('Go to Login'),
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => ChatPage()),
-                      );
+                      Navigator.pushNamed(context, '/chat');
                     },
-                    child: Text('Go to Chat'),
+                    child: const Text('Go to Chat'),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/bmi');
+                    },
+                    child: const Text('Go to BMI'),
                   ),
                 ],
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
